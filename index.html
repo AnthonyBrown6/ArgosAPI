@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Argos HUKD JSON API</title>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="index.css">
+
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>	
+
+var items = [];
+$.ajax({
+	type: 'GET',
+	url: "http://api.hotukdeals.com/rest_api/v2/?key=d4d7a091d9598bb3ad1e4246bc342c57&output=json&merchant=argos&exclude_expired&results_per_page=30",
+	success: function(object)
+		
+	{
+		<!--Gets all of the objects specified by the parameters in the url and stores them in the items array. The array is then sorted from the highest temperature descending-->
+		$(object.deals.items).each(function(index)
+		{
+			items.push(this);
+			items.sort(function(a,b){return parseFloat(b.temperature)-parseFloat(a.temperature)})
+
+		});
+		<!--Loop to get the ten hottest items and output the data onto the webpage-->
+		$(items).each(function(index)
+		{
+			document.getElementById("object"+index+"info").innerHTML = "Temperature: " +  this.temperature + "<br>" + " Price: &pound" + this.price + "<br>" + "Difference: ?" + "<br>" + " Description: " + this.description;
+			var hduklink =document.getElementById("object"+index+"deallinkHDUK")
+			hduklink.setAttribute("href",this.deal_link);
+			hduklink.innerHTML=this.title + "<br>";
+			
+			var image = document.createElement("img");
+			image.setAttribute("src",this.deal_image);
+			image.setAttribute("width",150);
+			image.setAttribute("height",150);
+			
+			var imagelink = document.createElement("a");
+			imagelink.setAttribute("href",this.deal_image_highres);
+			imagelink.setAttribute("target","_blank");
+			imagelink.appendChild(image);
+			
+			document.getElementById("object"+index+"image").appendChild(imagelink);
+			
+			<!-- Get the Argos Link-->
+			var string = image.src.substr(44,52);
+			var argoslink = "http://www.hotukdeals.com/visit?m=5&q=" + string;
+			
+			var alink =document.getElementById("object"+index+"deallinkARGOS");
+			alink.setAttribute("href",argoslink);
+			alink.innerHTML="Argos Link";
+		
+			console.log(argoslink);
+			return index < 9;
+			
+		});
+	}
+	
+})
+
+
+</script>
+</head>
+
+<body>
+	
+	<header>
+		<h1> Argos Hot Deals UK API</h1>
+		
+	</header>
+	<div id="wrapper">
+	<nav>
+		<ul>
+			<li>Home</li>
+			<li>Info</li>
+			<li>Contact Us</li>
+			<li>Shop</li>
+		</ul>
+	</nav>
+	
+		<div id="content">
+		
+			<div id="object0image"></div>
+			
+			<div id="object0">
+			<a id="object0deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object0deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object0info">object1 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+
+			<div id="object1image"></div>
+			
+			<div id="object1">
+			<a id="object1deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object1deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object1info">object2 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+			
+			<div id="object2image"></div>
+			
+			<div id="object2">
+			<a id="object2deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object2deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object2info">object3 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+			
+			<div id="object3image"></div>
+			
+			<div id="object3">
+			<a id="object3deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object3deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object3info">object4 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+			
+			<div id="object4image"></div>
+			
+			<div id="object4">
+			<a id="object4deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object4deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object4info">object5 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+			
+			<div id="object5image"></div>
+			
+			<div id="object5">
+			<a id="object5deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object5deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object5info">object6 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+			
+			<div id="object6image"></div>
+			
+			<div id="object6">
+			<a id="object6deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object6deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object6info">object7 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+			
+			<div id="object7image"></div>
+			
+			<div id="object7">
+			<a id="object7deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object7deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object7info">object8 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+			
+			<div id="object8image"></div>
+			
+			<div id="object8">
+			<a id="object8deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object8deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object8info">object9 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+			
+			<div id="object9image"></div>
+			
+			<div id="object9">
+			<a id="object9deallinkHDUK" href="" target="_blank">text</a>
+			<a id="object9deallinkARGOS" href="" target="_blank">text</a>
+			<p id="object9info">object10 Temperatue, Price, Difference, URL for deal, URL for product, Description </p>
+			</div>
+		</div>
+	
+	<footer>
+	Designed by Anthony Brown
+	</footer>
+	</div>
+</body>
+</html>
